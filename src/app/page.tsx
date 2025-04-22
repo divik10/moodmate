@@ -5,11 +5,11 @@ import Header from '../components/shared/Header';
 
 
 export default async function Home() {
-  // Ensure getServerSession is correctly typed
+  
   const session = await getServerSession(authOptions);
 
   if (session) {
-    // If there is a session, redirect to dashboard
+   
     redirect('/dashboard');
   }
 
