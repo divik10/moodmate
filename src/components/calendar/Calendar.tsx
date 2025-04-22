@@ -1,6 +1,6 @@
 'use client';
 
-import { eachDayOfInterval, endOfMonth, format, isSameDay, isSameMonth, startOfMonth } from 'date-fns';
+import { eachDayOfInterval, endOfMonth, format, isSameDay, startOfMonth } from 'date-fns';
 import { useState, useEffect } from 'react';
 import { Entry } from '@/types';
 

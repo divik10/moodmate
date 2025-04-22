@@ -23,6 +23,7 @@ export async function GET(request: Request) {
     });
     return NextResponse.json(entries);
   } catch (error) {
+    console.error('Error fetching entries:', error);
     return NextResponse.json(
       { error: 'Failed to fetch entries' },
       { status: 500 }
@@ -37,7 +38,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  
+
   if (body.userId !== session.user.id) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
@@ -55,6 +56,7 @@ export async function POST(request: Request) {
     });
     return NextResponse.json(entry);
   } catch (error) {
+    console.error('Error creating entry:', error);
     return NextResponse.json(
       { error: 'Failed to create entry' },
       { status: 500 }

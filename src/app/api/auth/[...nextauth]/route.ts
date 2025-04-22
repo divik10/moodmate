@@ -1,9 +1,8 @@
-import NextAuth, { NextAuthOptions, Session } from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { prisma } from '@/lib/db';
 import bcrypt from 'bcryptjs';
-import { JWT } from 'next-auth/jwt';
 
 // Extending the default user object to include 'id'
 declare module 'next-auth' {
@@ -71,8 +70,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      // Ensure session is not undefined and add the custom properties
-      if (session && session.user) {
+      if (session?.user) {
         session.user.id = token.id as string; // Add 'id' to the session.user
         session.user.email = token.email as string; // Add 'email' to the session.user
       }
@@ -83,4 +81,5 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 
+// Exporting handler for both GET and POST requests
 export { handler as GET, handler as POST };
